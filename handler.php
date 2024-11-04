@@ -9,14 +9,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     $name = $data['name'] ?? '';
     $phone = $data['whatsapp_phone'] ?? '';
-    $preferred_country = $data['last_input_text'] ?? '';
+    $dream_destination = $data['custom_fields']['dream_destination'] ?? '';
+    $has_valid_passport = $data['custom_fields']['has_valid_passport'] ?? 0;
+    $preferred_language = $data['custom_fields']['preferred_language'] ?? '';
 
     $formData = [
         'TITLE' => $name . ' - ManyChat',
         'NAME' => $name,
         'PHONE' => [['VALUE' => $phone, 'VALUE_TYPE' => 'WORK']],
-        'UF_CRM_LEAD_1679811828816' => ($preferred_country == 'Poland') ? 602 : (($preferred_country == 'Czech Republic') ? 604 : ''),
+        'UF_CRM_LEAD_1679811828816' => ($dream_destination == 'Poland') ? 602 : (($dream_destination == 'Czech Republic') ? 604 : ''),
         'SOURCE_ID' => '20|ANK_CHATS_APP24_WHATSAPP',
+        'UF_CRM_1725276419822' => $has_valid_passport ? 'Y' : 'N',
+        'UF_CRM_1730728557457' => $preferred_language,
+        'STATUS_ID' => 4,
     ];
 
     $result = CRest::call('crm.lead.add', [
