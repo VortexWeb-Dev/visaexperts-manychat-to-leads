@@ -12,6 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $dream_destination = $data['custom_fields']['dream_destination'] ?? '';
     $has_valid_passport = $data['custom_fields']['has_valid_passport'] ?? 0;
     $preferred_language = $data['custom_fields']['preferred_language'] ?? '';
+    $chat_url = $data['live_chat_url'] ?? '';
 
     $formData = [
         'TITLE' => $name . ' - ManyChat',
@@ -21,6 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'SOURCE_ID' => '20|ANK_CHATS_APP24_WHATSAPP',
         'UF_CRM_1725276419822' => $has_valid_passport ? 'Y' : 'N',
         'UF_CRM_1730728557457' => $preferred_language,
+        'UF_CRM_1730771131975' => $chat_url,
         'STATUS_ID' => 4,
     ];
 
