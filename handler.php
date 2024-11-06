@@ -7,12 +7,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     file_put_contents('logs/log.log', print_r($data, true), FILE_APPEND);
     
+    $stage = $_GET['stage'] ?? '';
+    
     $name = $data['name'] ?? '';
     $phone = $data['whatsapp_phone'] ?? '';
     $dream_destination = $data['custom_fields']['dream_destination'] ?? '';
     $has_valid_passport = $data['custom_fields']['has_valid_passport'] ?? 0;
     $preferred_language = $data['custom_fields']['preferred_language'] ?? '';
     $chat_url = $data['live_chat_url'] ?? '';
+    
+    $status_id = ($stage === 'inactive') ? 5 : 4;
 
     $formData = [
         'TITLE' => $name . ' - ManyChat',
@@ -23,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'UF_CRM_1725276419822' => $has_valid_passport ? 'Y' : 'N',
         'UF_CRM_1730728557457' => $preferred_language,
         'UF_CRM_1730771131975' => $chat_url,
-        'STATUS_ID' => 4,
+        'STATUS_ID' => $status_id,
     ];
 
     $result = CRest::call('crm.lead.add', [
