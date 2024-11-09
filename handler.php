@@ -1,5 +1,6 @@
 <?php
 require_once(__DIR__ . '/crest/crest.php');
+require_once(__DIR__ . '/utils.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $input = file_get_contents("php://input");
@@ -18,6 +19,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     $status_id = ($stage === 'inactive') ? 5 : 4;
 
+    $language_id = getLanguageId($preferred_language);
+    $agent_id = getAgentForLanguage($language_id);
+
     $formData = [
         'TITLE' => $name . ' - ManyChat',
         'NAME' => $name,
@@ -28,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'UF_CRM_1730728557457' => $preferred_language,
         'UF_CRM_1730771131975' => $chat_url,
         'STATUS_ID' => $status_id,
+        'ASSIGNED_BY_ID' => $agent_id
     ];
 
     $result = CRest::call('crm.lead.add', [
