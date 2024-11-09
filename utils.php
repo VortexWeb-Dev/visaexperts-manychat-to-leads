@@ -37,7 +37,7 @@ function getAgentForLanguage($languageId)
         do {
             $randomKey = array_rand($agents);
             $agent_id = $agents[$randomKey]['ID'] ?? null;
-        } while ($agent_id == 288684 || $agent_id == 293638);
+        } while ($agent_id == 288684 || $agent_id == 293638 || $agent_id == 133884);
 
         return $agent_id;
     }
