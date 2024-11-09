@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'TITLE' => $name . ' - ManyChat',
         'NAME' => $name,
         'PHONE' => [['VALUE' => $phone, 'VALUE_TYPE' => 'WORK']],
-        'UF_CRM_LEAD_1679811828816' => ($dream_destination == 'Poland') ? 602 : (($dream_destination == 'Czech Republic') ? 604 : ''),
+        'UF_CRM_LEAD_1728457253163' => $dream_destination,
         'SOURCE_ID' => '20|ANK_CHATS_APP24_WHATSAPP',
         'UF_CRM_1725276419822' => $has_valid_passport ? 'Y' : 'N',
         'UF_CRM_1730728557457' => $preferred_language,
@@ -40,4 +40,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 } else {
     echo json_encode(['status' => 'error', 'message' => 'Not a valid method']);
 }
-
